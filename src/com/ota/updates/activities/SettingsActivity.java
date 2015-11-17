@@ -170,6 +170,24 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	}
 
 	@Override
+	public boolean onPreferenceClick(Preference preference) {
+		String otaPackage = "com.ota.updatespro";
+
+		if (preference == mInstallPrefs) {
+			showInstallPrefs();
+		} else if (preference == mAboutActivity) {
+			Intent intent = new Intent(mContext, AboutActivity.class);
+			startActivity(intent);
+		} else if (preference == mProPreference) {
+			String url = "https://play.google.com/store/apps/details?id=" + otaPackage;
+			Intent intent = new Intent(Intent.ACTION_VIEW);
+			intent.setData(Uri.parse(url));
+			startActivity(intent);
+		}
+		return false;
+	}
+
+	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		boolean result = false;
 		if (preference == mRingtonePreference) {
